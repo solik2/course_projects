@@ -4,15 +4,20 @@
 ## Setup
 
 1. Clone the repository:
-$ git clone https://github.com/solik2/course_projects.git
+  ```
+  git clone https://github.com/solik2/course_projects.git
+  ```
 
 
 2. Navigate to the project directory:
-cd yourproject
-
+  ```
+  cd yourproject
+  ```
 
 3. Create a virtual environment:
-python -m venv env
+  ```
+  python -m venv env
+  ```
 
 
 4. Activate the virtual environment:
@@ -26,7 +31,8 @@ python -m venv env
   ```
 
 5. Install the dependencies:
-pip install -r requirements.txt
-
+  ```
+  pip install -r requirements.txt
+  ```
 
 6. Run the project as described.
