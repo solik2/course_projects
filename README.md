@@ -11,8 +11,9 @@
 
 2. Navigate to the project directory:
   ```
-  cd yourproject
+  cd course_projects
   ```
+
 
 3. Create a virtual environment:
   ```
@@ -21,14 +22,7 @@
 
 
 4. Activate the virtual environment:
-- On Windows:
-  ```
-  env\Scripts\activate
-  ```
-- On macOS/Linux:
-  ```
-  source env/bin/activate
-  ```
+
 
 5. Install the dependencies:
   ```
