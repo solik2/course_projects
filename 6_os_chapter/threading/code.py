@@ -1,26 +1,31 @@
 import threading    
-import time
+from threading import Lock
 
 num = 0
+mutex = threading.Lock()
 
 def increase_num():
     global num
+    mutex.acquire()
     for i in range(1000000):
         num += 1
+        mutex.release()
 
-  
 
 def decrease_num():
     global num
+    mutex.acquire()
     for i in range(1000000):
         num -= 1
+        mutex.release()
+
 
 def show_num():
     global num
     for i in range(1000):    
         print(num)
 
-    
+
 t1 = threading.Thread(target = increase_num)  #create the thread t1
 t2 = threading.Thread(target = decrease_num)  #create the thread t1
 t1.start()
