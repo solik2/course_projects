@@ -1,5 +1,4 @@
-# The numbers before every folder name is the number of the lesson. 
-# Which is numbered in the canva presentention.
+# The numbers before every folder name is the number of the lesson. Which is numbered in the canva presentention.
 
 
 ## Setup
