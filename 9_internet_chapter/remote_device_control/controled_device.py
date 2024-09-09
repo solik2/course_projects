@@ -2,34 +2,64 @@ from pynput.keyboard import Key, Controller
 from pynput.mouse import Button, Controller
 import socket
 
+
+HOST = '127.0.0.1'
+PORT = 6790
+
+server = socket.socket()
+server.bind((HOST, PORT))
+
+server.listen(1)
+controlling, address = server.accept()
+
 class contrl():
-    def __init__(self, func_name, agrs):
+    def __init__(self, _controller):
+        self.controller = _controller
         pass
     
-    def move(data):
+    def move(self,data):
         x, y = data
-        pass
+        self.controller.position(x, y)
 
-    def click(data):
-        x, y, pressed = data
-        pass
+    def mouse_press(self,data):
+        x, y, btn = data
+        if btn == 'Button.Left':
+            self.controller.press(Button.left)
+        else:
+            self.controller.press(Button.right)
 
-    def scroll(data):
+
+
+    def mouse_release(self,data):
+        x, y, btn = data
+        if btn == 'Button.Left':
+            self.controller.release(Button.left)
+        else:
+            self.controller.release(Button.right)
+
+
+    def scroll(self,data):
         x, y, dx, dy = data
         pass
 
-    def press(key):
+    def press(self,key):
         pass
 
-    def release(key):
+    def release(self,key):
         pass
 
 
 def handle_execution():
-    state, data = receive()
-    execute = getattr(contrl, state)
+    controller = Controller()
+    c = contrl(controller)
+    while True:
+        state, arrgs = receive(controlling)
+        execute = getattr(contrl, state)
+        execute(arrgs)
 
     
-def receive():
-    # receive packet and format it
-    pass
+def receive(controlling):
+    res = controlling.recv(100).decode("utf-8")
+    data = res.split(',')
+    return data[0], data[1:]
+

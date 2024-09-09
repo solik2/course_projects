@@ -27,7 +27,7 @@ status: not started
 
 
 
-# KEYBOARD EVENT PACKET STRUCTURE
-"keyboard 
+# EVENT PACKET STRUCTURE
+b'function_name, args: x,y,b...'
 
 
