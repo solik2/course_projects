@@ -1,6 +1,7 @@
 from pynput.keyboard import Key, Controller
 from pynput.mouse import Button, Controller
 import socket
+import time
 
 
 HOST = '127.0.0.1'
@@ -19,6 +20,8 @@ class contrl():
     
     def move(self,data):
         x, y = data
+        x = float(x)
+        y = float(y)
         self.controller.position(x, y)
 
     def mouse_press(self,data):
@@ -53,13 +56,24 @@ def handle_execution():
     controller = Controller()
     c = contrl(controller)
     while True:
+        time.sleep(0.1)
         state, arrgs = receive(controlling)
-        execute = getattr(contrl, state)
+        print("state: " + str(state))
+        print("arrgs: " + str(arrgs))
+        execute = getattr(c, state)
         execute(arrgs)
 
     
 def receive(controlling):
-    res = controlling.recv(100).decode("utf-8")
-    data = res.split(',')
+    # res = controlling.recv(100).decode("utf-8")
+    res = b""
+
+    while True:
+        res += controlling.recv(2)
+        if res[-2:] == b'\r\n':     # No more data received, quitting
+            break
+    # print(res)
+    data = res.decode()[:-2].split(',')
     return data[0], data[1:]
 
+handle_execution()
